@@ -13,7 +13,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
-    //opts.AutoCreateSchemaObjects = AutoCreate.CreateOrUpdate; //create the schema in the database in the runtime
+    opts.AutoCreateSchemaObjects = AutoCreate.CreateOrUpdate; //create the schema in the database in the runtime
 }).UseLightweightSessions();
 
 builder.Configuration

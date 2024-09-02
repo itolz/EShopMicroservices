@@ -24,6 +24,8 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+builder.Services.AddHealthChecks();
+
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
@@ -38,5 +40,7 @@ var app = builder.Build();
 app.MapCarter();
 
 app.UseExceptionHandler(options => { });
+
+app.UseHealthChecks("/health");
 
 app.Run();

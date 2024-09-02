@@ -16,8 +16,11 @@ builder.Services.AddCarter();
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
-    opts.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.CreateOrUpdate; //create the schema in the database in the runtime
+    //opts.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.CreateOrUpdate; //create the schema in the database in the runtime
 }).UseLightweightSessions();
+
+if (builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 

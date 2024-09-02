@@ -19,14 +19,11 @@ namespace Catalog.API.Products.CreateProduct
             RuleFor(x => x.Price).NotEmpty().WithMessage("Price must be greater than 0");
         }
     }
-    internal class CreateProductCommandtHandler(IDocumentSession session, ILogger<CreateProductCommandtHandler> logger)
+    internal class CreateProductCommandtHandler(IDocumentSession session)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-
-            logger.LogInformation("CreateProductCommandHandler.Handle called with {@Command}", command);
-
             //product entity
             var product = new Product
             {
